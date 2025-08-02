@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/JulianSchoenbaechler/webdev-frontend/issues"
   },
-  "homepage": "https://github.com/JulianSchoenbaechler/webdev-frontend#readme"
+  "homepage": "https://github.com/JulianSchoenbaechler/webdev-frontend#readme",
+  "devDependencies": {
+    "@types/node": "^24.1.0"
+  }
 }
