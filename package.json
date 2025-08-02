@@ -1,0 +1,22 @@
+{
+  "name": "jules-webdev-frontend",
+  "version": "0.1.0",
+  "description": "Amalgamation of frontend components, styles and logic that might be useful for frontend development.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JulianSchoenbaechler/webdev-frontend.git"
+  },
+  "keywords": [
+    "web",
+    "frontend"
+  ],
+  "author": "Julian Schönbächler",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/JulianSchoenbaechler/webdev-frontend/issues"
+  },
+  "homepage": "https://github.com/JulianSchoenbaechler/webdev-frontend#readme"
+}
