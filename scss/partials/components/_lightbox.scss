@@ -1,0 +1,195 @@
+#lightbox {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    visibility: hidden;
+    overflow: visible;
+
+    .background {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+        opacity: 0;
+        z-index: 0;
+    }
+
+    figure {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        left: 1rem;
+        bottom: 1rem;
+        display: flex;
+        flex-flow: column nowrap;
+        margin: 0;
+        overflow: visible;
+        opacity: 0;
+        z-index: 1;
+
+        &.active {
+            opacity: 1;
+        }
+        &.front {
+            z-index: 1;
+        }
+        &.zoom {
+            touch-action: none;
+        }
+
+        & > * {
+            flex: 0 1 auto;
+        }
+
+        picture {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            min-width: 0;
+            min-height: 0;
+            margin: 0;
+            overflow: visible;
+            z-index: 0;
+
+            & > img {
+                width: auto;
+                height: auto;
+                max-width: 100%;
+                max-height: 100%;
+            }
+        }
+
+        figcaption {
+            display: block;
+            margin: 1rem 0 0;
+            text-align: center;
+            color: white;
+            opacity: 0;
+            z-index: 1;
+        }
+    }
+
+    button {
+        position: absolute;
+        display: block;
+        padding: 0;
+        border: none;
+        outline: inherit;
+        background: none;
+        overflow: visible;
+        visibility: hidden;
+        cursor: pointer;
+        z-index: 99;
+
+        &::before, &::after {
+            position: absolute;
+            display: block;
+            content: "";
+            transition: transform 0.25s ease;
+        }
+
+        &::before {
+            transform: rotate(45deg);
+        }
+
+        &::after {
+            transform: rotate(-45deg);
+        }
+
+        &.close {
+            top: 1rem;
+            right: 1rem;
+            width: 3rem;
+            height: 3rem;
+
+            &::before, &::after {
+                top: 0;
+                left: calc(50% - 2px);
+                width: 4px;
+                height: 100%;
+                background-color: white;
+            }
+
+            &:hover {
+                &::before {
+                    transform: rotate(225deg);
+                }
+
+                &::after {
+                    transform: rotate(135deg);
+                }
+            }
+        }
+
+        &.next, &.previous {
+            top: 1rem;
+            bottom: 1rem;
+            width: 6rem;
+            margin: auto;
+        }
+
+        &.next {
+            right: 0;
+
+            &::before {
+                left: 0;
+                width: 3rem;
+                height: 3rem;
+                border-top: solid 4px white;
+                border-right: solid 4px white;
+            }
+
+            &:hover::before {
+                transform: rotate(45deg) translate(0.5rem, -0.5rem);
+            }
+        }
+
+        &.previous {
+            left: 0;
+
+            &::after {
+                right: 0;
+                width: 3rem;
+                height: 3rem;
+                border-top: solid 4px white;
+                border-left: solid 4px white;
+            }
+
+            &:hover::after {
+                transform: rotate(-45deg) translate(-0.5rem, -0.5rem);
+            }
+        }
+    }
+
+    // Render lightbox and enable transitions
+    &.visible {
+        visibility: visible;
+
+        .background {
+            transition: opacity 0.5s ease;
+        }
+
+        figure, figcaption {
+            transition: opacity 0.25s ease;
+        }
+
+        img {
+            transition: transform 0.35s ease;
+        }
+    }
+
+    &.open {
+        .background, figcaption {
+            opacity: 1;
+        }
+
+        button {
+            visibility: visible;
+        }
+    }
+}
