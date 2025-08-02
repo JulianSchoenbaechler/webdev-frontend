@@ -1,5 +1,5 @@
 {
-  "name": "jules-webdev-frontend",
+  "name": "@julian-sch/webdev-frontend",
   "version": "0.1.0",
   "description": "Amalgamation of frontend components, styles and logic that might be useful for frontend development.",
   "scripts": {
@@ -13,7 +13,7 @@
     "web",
     "frontend"
   ],
-  "author": "Julian Schönbächler",
+  "author": "Julian Schönbächler <info@julian-s.ch> (https://julian-s.ch/)",
   "license": "MPL-2.0",
   "bugs": {
     "url": "https://github.com/JulianSchoenbaechler/webdev-frontend/issues"
