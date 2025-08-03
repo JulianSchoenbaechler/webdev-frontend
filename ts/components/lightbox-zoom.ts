@@ -255,6 +255,8 @@ interface Lightbox {
 //       _/_/_/  _/_/_/_/    _/_/    _/_/_/    _/    _/  _/_/_/_/  _/_/_/
 //______________________________________________________________________________________________________________________
 
+export const VERSION = '1.0.0';
+
 let config: Required<Options>;
 let lightbox: Lightbox;
 let lightboxTransitionDuration: number;
@@ -1104,3 +1106,16 @@ export function init(options?: Options) {
 
     window.addEventListener('resize', debounce(lightboxResizeHandler), true);
 }
+
+
+//          _/_/_/    _/_/_/_/  _/      _/  _/_/_/    _/_/_/  _/_/_/    _/_/    _/      _/    _/_/_/
+//         _/    _/  _/        _/      _/    _/    _/          _/    _/    _/  _/_/    _/  _/
+//        _/_/_/    _/_/_/    _/      _/    _/      _/_/      _/    _/    _/  _/  _/  _/    _/_/
+//       _/    _/  _/          _/  _/      _/          _/    _/    _/    _/  _/    _/_/        _/
+//      _/    _/  _/_/_/_/      _/      _/_/_/  _/_/_/    _/_/_/    _/_/    _/      _/  _/_/_/
+//______________________________________________________________________________________________________________________
+
+// 1.0.0    (2025-08-03)    Initial release of component. <img>, <picture> and <a> elements can trigger lightbox.
+//                          Functionality for lazyloading bigger images into back buffers, inclusive automatic swap.
+//                          Gallery mode, basic styling, scroll and resize handling. Controlled sequence of adding and
+//                          removing classes to DOM elements while respecting and awaiting browser reflows and repaints.
