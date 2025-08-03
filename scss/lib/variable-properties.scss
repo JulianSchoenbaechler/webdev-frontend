@@ -41,5 +41,5 @@
         #{$property}: if($value, $value, $fallback);
     }
 
-    #{$property}: var($variable-name, if($fallback, $fallback, $value));
+    #{$property}: var(#{$variable-name}, if($fallback, $fallback, $value));
 }
