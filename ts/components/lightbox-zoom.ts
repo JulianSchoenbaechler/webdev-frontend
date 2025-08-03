@@ -600,7 +600,7 @@ async function bufferLoadImage(buffer: Buffer, from: ImageReference) {
                          ? from.image
                          : from.image.querySelector('img')!;
 
-        const captionText = from.wrapper.dataset[`${config.dataSelector}Caption`] ??
+    const captionText = from.wrapper.dataset[`${config.dataSelector}Caption`] ??
                         from.wrapper.querySelector('figcaption')?.textContent;
     const imageAlt = from.wrapper.dataset[`${config.dataSelector}Alt`] ?? imageElement.alt;
     const imageSrc = from.wrapper.dataset[`${config.dataSelector}Src`] ?? imageElement.src;
@@ -617,8 +617,6 @@ async function bufferLoadImage(buffer: Buffer, from: ImageReference) {
         for (const sourceElement of buffer.picture.querySelectorAll('source')) {
             if (i < sourceList.length) {
                 sourceElement.srcset = sourceList[i].srcset;
-                // TODO(julian): Set the sizes either to 100vw or try to fetch the full-resolution image directly by
-                //  also respecting the zoom factor.
                 sourceElement.sizes = imageSizes;
                 sourceElement.media = sourceList[i].media;
                 sourceElement.type = sourceList[i].type;
