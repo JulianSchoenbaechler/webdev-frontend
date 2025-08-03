@@ -1,0 +1,45 @@
+/*!
+ * CSS property variable mixins and utilities.
+ *
+ * Author: Julian Schönbächler (https://julian-s.ch/ | info@julian-s.ch)
+ * Copyright: Julian Schönbächler, 2025
+ * License: MPL-2.0
+ */
+
+@use "sass:meta";
+@use "sass:list";
+@use "sass:map";
+
+@function flat-properties($variable, $property: "-", $property-map: ()) {
+    @if meta.type-of($variable) != "map" {
+        $property-map: map.set($property-map, $property, $variable);
+    } @else {
+        @each $key, $value in $variable {
+            $property-map: flat-properties($value, "#{$property}-#{$key}", $property-map)
+        }
+    }
+
+    @return $property-map;
+}
+
+@mixin declare($variable-map: ()) {
+    @each $property, $value in flat-properties($variable-map) {
+        #{$property}: $value;
+    }
+}
+
+@mixin get($property, $variable-key, $variable-map: (), $fallback: null, $write-static: true) {
+    $variable-name: "-";
+
+    @each $key in $variable-key {
+        $variable-name: "#{$variable-name}-#{$key}";
+    }
+
+    $value: map.get($variable-map, $variable-key...);
+
+    @if $write-static {
+        #{$property}: if($value, $value, $fallback);
+    }
+
+    #{$property}: var($variable-name, if($fallback, $fallback, $value));
+}
