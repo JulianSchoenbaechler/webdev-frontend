@@ -1,25 +1,25 @@
 {
-  "name": "@julian-sch/webdev-frontend",
-  "version": "0.2.1",
-  "description": "Amalgamation of components, styles and logic that might be useful for frontend development.",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JulianSchoenbaechler/webdev-frontend.git"
-  },
-  "keywords": [
-    "web",
-    "frontend"
-  ],
-  "author": "Julian Schönbächler <info@julian-s.ch> (https://julian-s.ch/)",
-  "license": "MPL-2.0",
-  "bugs": {
-    "url": "https://github.com/JulianSchoenbaechler/webdev-frontend/issues"
-  },
-  "homepage": "https://github.com/JulianSchoenbaechler/webdev-frontend#readme",
-  "devDependencies": {
-    "@types/node": "^24.1.0"
-  }
+    "name": "@julian-sch/webdev-frontend",
+    "version": "0.2.2",
+    "description": "Amalgamation of components, styles and logic that might be useful for frontend development.",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/JulianSchoenbaechler/webdev-frontend.git"
+    },
+    "keywords": [
+        "web",
+        "frontend"
+    ],
+    "author": "Julian Schönbächler <info@julian-s.ch> (https://julian-s.ch/)",
+    "license": "MPL-2.0",
+    "bugs": {
+        "url": "https://github.com/JulianSchoenbaechler/webdev-frontend/issues"
+    },
+    "homepage": "https://github.com/JulianSchoenbaechler/webdev-frontend#readme",
+    "devDependencies": {
+        "@types/node": "^24.1.0"
+    }
 }

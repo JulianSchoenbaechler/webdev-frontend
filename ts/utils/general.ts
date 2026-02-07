@@ -91,7 +91,7 @@ export function waitForNextRepaint() {
     //  https://issues.chromium.org/issues/41292070
     //  The next animation frame potentially runs before the next reflow/render event of the browser. As I understand
     //  it, this happens for the first call to 'requestAnimationFrame()' between queued events (basically in one frame).
-    //  As there is no way of checking if a an animation frame was already requested before the next event, we just fire
+    //  As there is no way of checking if an animation frame was already requested before the next event, we just fire
     //  it twice and await 2 frames at once, guaranteeing us at least one full browser render call. Downside to this is
     //  an artificially introduced pause of >=16.7ms.
     return new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));

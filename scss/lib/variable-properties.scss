@@ -6,40 +6,85 @@
  * License: MPL-2.0
  */
 
-@use "sass:meta";
 @use "sass:list";
 @use "sass:map";
+@use "sass:meta";
+@use "sass:string";
 
-@function flat-properties($variable, $property: "-", $property-map: ()) {
-    @if meta.type-of($variable) != "map" {
-        $property-map: map.set($property-map, $property, $variable);
+@function flatten-variable-map($variable-map, $variable-name: "-", $flatten: ()) {
+    @if meta.type-of($variable-map) == "map" {
+        @each $key, $value in $variable-map {
+            $flatten: flatten-variable-map($value, "#{$variable-name}-#{$key}", $flatten);
+        }
     } @else {
-        @each $key, $value in $variable {
-            $property-map: flat-properties($value, "#{$property}-#{$key}", $property-map)
+        $flatten: map.set($flatten, $variable-name, $variable-map);
+    }
+
+    @return $flatten;
+}
+
+@function var-get-name($variable) {
+    $name: "-";
+
+    @if meta.type-of($variable) == "string" {
+        $name: "--#{$variable}";
+    } @else {
+        @each $key in $variable {
+            $name: "#{$name}-#{$key}";
         }
     }
 
-    @return $property-map;
+    @return $name;
+}
+
+@function var-get-value($variable, $variable-map: (), $fallback: null) {
+    @if meta.type-of($variable) == "string" {
+        $variable: string.split($variable, "-");
+    }
+
+    $value: map.get($variable-map, $variable...);
+
+    @if $value {
+        @return $value;
+    }
+
+    @return $fallback;
+}
+
+@function css-var($variable, $variable-map: (), $fallback: null) {
+    $name: var-get-name($variable);
+    $value: var-get-value($variable, $variable-map, $fallback);
+
+    @if $value {
+        @return string.unquote("var(#{$name}, #{$value})");
+    } @else {
+        @return string.unquote("var(#{$name})");
+    }
 }
 
 @mixin declare($variable-map: ()) {
-    @each $property, $value in flat-properties($variable-map) {
-        #{$property}: $value;
+    @each $variable-name, $value in flatten-variable-map($variable-map) {
+        #{$variable-name}: $value;
     }
 }
 
-@mixin get($property, $variable-key, $variable-map: (), $fallback: null, $write-static: true) {
-    $variable-name: "-";
-
-    @each $key in $variable-key {
-        $variable-name: "#{$variable-name}-#{$key}";
-    }
-
-    $value: map.get($variable-map, $variable-key...);
+@mixin get($property, $variable, $variable-map: (), $fallback: null, $write-static: false) {
+    $name: var-get-name($variable);
+    $value: var-get-value($variable, $variable-map, $fallback);
 
     @if $write-static {
-        #{$property}: if($value, $value, $fallback);
+        @if $value {
+            #{$property}: $value;
+            #{$property}: var(#{$name}, #{$value});
+        } @else {
+            #{$property}: var(#{$name});
+        }
+    } @else {
+        @if $value {
+            #{$property}: var(#{$name}, #{$value});
+        } @else {
+            #{$property}: var(#{$name});
+        }
     }
-
-    #{$property}: var(#{$variable-name}, if($fallback, $fallback, $value));
+    @debug $name;
 }
