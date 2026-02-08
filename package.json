@@ -1,6 +1,6 @@
 {
     "name": "@julian-sch/webdev-frontend",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "description": "Amalgamation of components, styles and logic that might be useful for frontend development.",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
